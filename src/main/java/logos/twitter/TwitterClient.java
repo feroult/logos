@@ -18,7 +18,6 @@ public class TwitterClient {
 	}
 	
 	public static void directTweet(String msg) {
-
 		try {
 			Twitter twitter = new TwitterFactory().getInstance();
 
@@ -33,7 +32,6 @@ public class TwitterClient {
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private static String getEnv(String key) {

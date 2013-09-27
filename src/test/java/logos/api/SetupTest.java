@@ -16,13 +16,12 @@ public class SetupTest {
 	public void testInvalidProperty() {
 		assertNull(logosProperty("x"));
 	}
-	
+
 	@Test
 	public void testTwitterProperties() {
 		assertNotNull(logosProperty(CONSUMER_KEY));
 		assertNotNull(logosProperty(CONSUMER_SECRET));
 		assertNotNull(logosProperty(TOKEN));
-		assertNotNull(logosProperty(TOKEN_SECRET));		
+		assertNotNull(logosProperty(TOKEN_SECRET));
 	}
 }
-

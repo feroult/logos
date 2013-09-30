@@ -13,7 +13,8 @@
 		<appengine.app.version>1</appengine.app.version>
 		<appengine.target.version>1.8.1</appengine.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<gapi.serviceAccountKeyPath>${env.GAPI_SERVICE_ACCOUNT_KEY_PATH}</gapi.serviceAccountKeyPath>
+		<gapi.service.account.email>${env.GAPI_SERVICE_ACCOUNT_EMAIL}</gapi.service.account.email>		
+		<gapi.service.account.key>${env.GAPI_SERVICE_ACCOUNT_KEY}</gapi.service.account.key>
 	</properties>
 
 	<dependencies>
@@ -69,7 +70,7 @@
 					<include>logos.properties</include>
 				</includes>
 				<filtering>true</filtering>
-			</resource>
+			</resource>	
 		</resources>
 
 		<plugins>
@@ -79,26 +80,26 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
-                        <id>gapi-path-regex-property</id>
+                        <id>gapi-key-dir-regex-property</id>
                         <goals>
                             <goal>regex-property</goal>
                         </goals>
 						<configuration>
-							<name>gapi.key.directory</name>
-							<value>${gapi.serviceAccountKeyPath}</value>
+							<name>gapi.service.account.key.dir</name>
+							<value>${gapi.service.account.key}</value>
 							<regex>^(.*)\/([^\/]*)$</regex>
 							<replacement>$1</replacement>
 							<failIfNoMatch>true</failIfNoMatch>
 						</configuration>
 					</execution>
                     <execution>
-                        <id>gapi-key-regex-property</id>
+                        <id>gapi-key-file-regex-property</id>
                         <goals>
                             <goal>regex-property</goal>
                         </goals>
                         <configuration>
-                            <name>gapi.key.file</name>
-                            <value>${gapi.serviceAccountKeyPath}</value>
+                            <name>gapi.service.account.key.file</name>
+                            <value>${gapi.service.account.key}</value>
                             <regex>^(.*)\/([^\/]*)$</regex>
                             <replacement>$2</replacement>
                             <failIfNoMatch>true</failIfNoMatch>
@@ -132,9 +133,9 @@
 						</resource>
 						<!-- GAPI Key -->
 						<resource>
-							<directory>${gapi.key.directory}</directory>
+							<directory>${gapi.service.account.key.dir}</directory>
 							<includes>
-								<include>${gapi.key.file}</include>
+								<include>${gapi.service.account.key.file}</include>
 							</includes>
 							<filtering>true</filtering>
 							<targetPath>WEB-INF</targetPath>

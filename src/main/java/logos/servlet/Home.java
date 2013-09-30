@@ -1,5 +1,7 @@
 package logos.servlet;
 
+import gapi.GoogleAPI;
+
 import java.io.IOException;
 
 import javax.servlet.http.HttpServlet;
@@ -15,8 +17,12 @@ public class Home extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/plain");
 		resp.getWriter().println("Hello, twitter");
-				
-		String tweet = req.getParameter("tweet");
+		
+		GoogleAPI google = new GoogleAPI();
+		
+		String tweet = google.spreadsheet("0AiEZezeUULf3dHh3UEdOSXE3YzJmTXNmRVNJWkI4NEE").worksheet("test").getValue(1, 1);		
+		//String tweet = req.getParameter("tweet");
+		
 		if(tweet != null) {
 			TwitterClient.directTweet(tweet);
 		}

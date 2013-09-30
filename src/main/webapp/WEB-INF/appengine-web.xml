@@ -6,7 +6,7 @@
 
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
-        <property name="gapi.service.account.email" valeu="${gapi.service.account.email}" />
-        <property name="gapi.service.account.key" valeu="/${gapi.service.account.key.file}" />
+        <property name="gapi.service.account.email" value="${gapi.service.account.email}" />
+        <property name="gapi.service.account.key" value="/${gapi.service.account.key.file}" />
     </system-properties>
 </appengine-web-app>

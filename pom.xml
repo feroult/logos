@@ -13,8 +13,12 @@
 		<appengine.app.version>1</appengine.app.version>
 		<appengine.target.version>1.8.1</appengine.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<gapi.service.account.email>${env.GAPI_SERVICE_ACCOUNT_EMAIL}</gapi.service.account.email>		
-		<gapi.service.account.key>${env.GAPI_SERVICE_ACCOUNT_KEY}</gapi.service.account.key>
+		<gapi.service.account.email>${env.GAPI_SERVICE_ACCOUNT_EMAIL}</gapi.service.account.email>
+		<gapi.service.account.key>${env.GAPI_SERVICE_ACCOUNT_KEY}</gapi.service.account.key>		
+		<logos.consumer.key>${env.LOGOS_CONSUMER_KEY}</logos.consumer.key>
+		<logos.consumer.secret>${env.LOGOS_CONSUMER_SECRET}</logos.consumer.secret>
+        <logos.token>${env.LOGOS_TOKEN}</logos.token>
+        <logos.token.secret>${env.LOGOS_TOKEN_SECRET}</logos.token.secret>		
 	</properties>
 
 	<dependencies>
@@ -70,7 +74,7 @@
 					<include>logos.properties</include>
 				</includes>
 				<filtering>true</filtering>
-			</resource>	
+			</resource>
 		</resources>
 
 		<plugins>
@@ -80,10 +84,10 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
-                        <id>gapi-key-dir-regex-property</id>
-                        <goals>
-                            <goal>regex-property</goal>
-                        </goals>
+						<id>gapi-key-dir-regex-property</id>
+						<goals>
+							<goal>regex-property</goal>
+						</goals>
 						<configuration>
 							<name>gapi.service.account.key.dir</name>
 							<value>${gapi.service.account.key}</value>
@@ -92,19 +96,19 @@
 							<failIfNoMatch>true</failIfNoMatch>
 						</configuration>
 					</execution>
-                    <execution>
-                        <id>gapi-key-file-regex-property</id>
-                        <goals>
-                            <goal>regex-property</goal>
-                        </goals>
-                        <configuration>
-                            <name>gapi.service.account.key.file</name>
-                            <value>${gapi.service.account.key}</value>
-                            <regex>^(.*)\/([^\/]*)$</regex>
-                            <replacement>$2</replacement>
-                            <failIfNoMatch>true</failIfNoMatch>
-                        </configuration>
-                    </execution>					
+					<execution>
+						<id>gapi-key-file-regex-property</id>
+						<goals>
+							<goal>regex-property</goal>
+						</goals>
+						<configuration>
+							<name>gapi.service.account.key.file</name>
+							<value>${gapi.service.account.key}</value>
+							<regex>^(.*)\/([^\/]*)$</regex>
+							<replacement>$2</replacement>
+							<failIfNoMatch>true</failIfNoMatch>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
@@ -131,23 +135,30 @@
 							<filtering>true</filtering>
 							<targetPath>WEB-INF</targetPath>
 						</resource>
-						<!-- GAPI Key -->
+						<!-- GAPI key -->
 						<resource>
 							<directory>${gapi.service.account.key.dir}</directory>
 							<includes>
 								<include>${gapi.service.account.key.file}</include>
 							</includes>
-							<filtering>true</filtering>
-							<targetPath>WEB-INF</targetPath>
+							<filtering>false</filtering>
+							<targetPath>WEB-INF/classes</targetPath>
 						</resource>
 					</webResources>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>${appengine.target.version}</version>
+				<configuration>
+					<jvmFlags>
+						<jvmFlag>-Xdebug</jvmFlag>
+						<jvmFlag>-Xrunjdwp:transport=dt_socket,address=4001,server=y,suspend=n
+						</jvmFlag>
+					</jvmFlags>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

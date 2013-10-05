@@ -10,6 +10,8 @@ public class Setup {
 	public static final String CONSUMER_SECRET = "logos.consumer.secret";
 	public static final String TOKEN = "logos.token";
 	public static final String TOKEN_SECRET = "logos.token.secret";
+	
+	private static final String SPREADSHEET_KEY = "logos.spreadsheet.key";
 
 	private static Properties properties;
 
@@ -33,5 +35,9 @@ public class Setup {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static String spreadsheetKey() {
+		return logosProperty(SPREADSHEET_KEY);
 	}
 }
